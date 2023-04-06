@@ -9,7 +9,7 @@ class UpdateProductUseCaseTest(unittest.TestCase):
   def test_update_product_name(self):
     products_repository = InMemoryProductsRepository()
     product = CreateProductUseCase(products_repository).execute("Pen__", 1.99)
-    new_product = Product(uuid4(), "Pen", 1.99)
+    new_product = Product(uuid4().hex, "Pen", 1.99)
     update_product_usecase = UpdateProductUseCase(products_repository)
     update_product_usecase.execute(product.id, ChangeType.NAME, new_product.name)
     self.assertEqual(
@@ -20,7 +20,7 @@ class UpdateProductUseCaseTest(unittest.TestCase):
   def test_update_product_price(self):
     products_repository = InMemoryProductsRepository()
     product = CreateProductUseCase(products_repository).execute("Pen", 1.99)
-    new_product = Product(uuid4(), "Pen", 4.99)
+    new_product = Product(uuid4().hex, "Pen", 4.99)
     update_product_usecase = UpdateProductUseCase(products_repository)
     update_product_usecase.execute(product.id, ChangeType.PRICE, new_product.price)
     self.assertEqual(

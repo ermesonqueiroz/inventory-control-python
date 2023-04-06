@@ -6,6 +6,6 @@ class CreateProductUseCase:
     self.products_repository = products_repository
 
   def execute(self, product_name, product_price):
-    product = Product(uuid4(), product_name, product_price)
+    product = Product(uuid4().hex, product_name, product_price)
     self.products_repository.add(product)
     return product
