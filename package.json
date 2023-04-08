@@ -1,0 +1,19 @@
+{
+  "name": "inventory-control",
+  "version": "1.0.0",
+  "scripts": {
+    "dev:web-client": "npm run dev --workspace @inventory-control/web-client",
+    "dev:server": "python -m flask --app packages/server/src/app run",
+    "dev": "concurrently -n web-client,server 'npm run dev:server' 'npm run dev:web-client'"
+  },
+  "author": "Ermeson Sampaio<ermeson.sampaio.queiroz@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}

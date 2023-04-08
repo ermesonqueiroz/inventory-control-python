@@ -12,9 +12,9 @@ class MongoProductsRepository(ProductsRepository):
     collection = mongohelper.get_products_collection()
     collection.insert_one(new_product)
 
-  def get_all(self):
+  def get_all(self, limit = 10, page = 1):
     collection = mongohelper.get_products_collection()
-    return collection.find()
+    return collection.find().skip((page - 1) * limit).limit(limit)
 
   def update_name(self, product_id, new_value):
     collection = mongohelper.get_products_collection()
@@ -41,3 +41,8 @@ class MongoProductsRepository(ProductsRepository):
       "price": product["price"],
       "active": product["active"]
     }
+
+  def count(self):
+    collection = mongohelper.get_products_collection()
+    products_length = collection.count_documents({})
+    return products_length
